@@ -7,7 +7,7 @@
     "start": "node --watch index.js",
     "test": "jest"
   },
-  "author": "Matthew English",
+  "author": "Amanda Halley, Ryan Tibbo, Tyler Wall",
   "license": "MIT",
   "dependencies": {
     "ejs": "^3.1.10",
