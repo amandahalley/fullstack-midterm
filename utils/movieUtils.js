@@ -7,7 +7,8 @@ const { Movies, Genres } = require("./data");
  * @returns {Array.<Movies>} - An array of movies matching the genre
  */
 function getMoviesByGenre(genre, x) {
-    // Implementation here
+    const movieByGenre = movies.filter(movie => movie.genre === genre);
+    return movieByGenre.slive(0, x);
 }
 
 /**
