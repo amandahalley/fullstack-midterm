@@ -156,3 +156,24 @@ h3 {
   font-size: 0.9em;
   color: #d0d0d0;
 }
+
+.footer {
+  background-color: #1e1e1e;
+  text-align: center;
+  color: whitesmoke;
+  padding: 10px 0;
+  width: 100%;
+}
+
+.footer-content {
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer p {
+  margin: 10px 0;
+}
+
+.social-media {
+  margin-top: 10px;
+}
