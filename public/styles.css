@@ -1,28 +1,158 @@
-/* Base styling, feel free to remove or alter */
-
 body {
-    background: linear-gradient(90deg, rgba(93,142,251,1) 0%, rgba(93,142,251,1) 50%, rgba(0,212,255,1) 100%);
-    height: 100%;
-    padding: 0px;
-    margin: 0px;
-    font-family: 'Lato', sans-serif;
-    display: flex;
-    color: #F6F6F6;
+  background-color: #1e1e1e; /* Dark background */
+  color: #f0f0f0; /* Light text for contrast */
+  font-family: "Arial", sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: #00aaff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+a:hover {
+  color: #ffaa00;
 }
 
 .main-content {
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    align-items: center;
-    flex-direction: column;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.main-content h1 {
-    font-size: 50px;
+h1,
+h2,
+h3 {
+  color: #ffaa00; /* Highlighted titles */
+  margin-bottom: 15px;
 }
 
-/* to add styling for nav bar */
+.movie-card,
+.recommendation-card {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.movie-card h3,
+.recommendation-card h4 {
+  margin-bottom: 10px;
+}
+
+.movie-card p,
+.recommendation-card p {
+  margin: 5px 0;
+}
+
+.recommendations {
+  margin-top: 30px;
+}
+
+.recommendations h2 {
+  margin-bottom: 20px;
+}
+
+.recommendation-card {
+  display: inline-block;
+  width: calc(100% / 3 - 20px); /* 3 cards per row */
+  margin-right: 10px;
+  vertical-align: top;
+}
+
+.recommendation-card:last-child {
+  margin-right: 0;
+}
+
 .nav_container {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
 
+.nav_container a {
+  color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #444;
+}
+
+.nav_container a:hover {
+  background-color: #ffaa00;
+  color: #1e1e1e;
+}
+
+.movie-details-container {
+  background-color: #333; /* Dark card background */
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  color: #f0f0f0; /* Light text color */
+}
+
+.movie-details-container h1 {
+  color: #ffaa00; /* Highlighted title color */
+  margin-bottom: 15px;
+}
+
+.movie-details-container p {
+  margin: 10px 0;
+  font-size: 1.1em;
+}
+
+.movie-details-container .movie-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.movie-details-container .info-item {
+  background-color: #444; /* Slightly lighter background for sections */
+  padding: 15px;
+  border-radius: 8px;
+  flex: 1 1 calc(50% - 20px); /* Responsive 2-column layout */
+  margin-bottom: 15px;
+}
+
+.movie-details-container .info-item strong {
+  color: #ffaa00;
+}
+
+.recommendations {
+  margin-top: 30px;
+}
+
+.recommendations h2 {
+  margin-bottom: 20px;
+  color: #ffaa00;
+}
+
+.recommendation-card {
+  display: inline-block;
+  background-color: #444;
+  padding: 15px;
+  border-radius: 8px;
+  width: calc(100% / 3 - 20px); /* 3 cards per row */
+  margin-right: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.recommendation-card h4 {
+  color: #f0f0f0;
+  margin-bottom: 10px;
+}
+
+.recommendation-card p {
+  font-size: 0.9em;
+  color: #d0d0d0;
 }
