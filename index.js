@@ -14,33 +14,50 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.static("public"));
 
-app.get("/", (request, response) => {
-  response.render("index");
+// Home page route: Display 9 random movies
+app.get("/", (req, res) => {
+  const randomMovies = Movies.sort(() => 0.5 - Math.random()).slice(0, 9);
+  res.render("index", { movies: randomMovies });
 });
 
-//Added required pages
-app.get('/movie', (req, res) => {
-  res.render('movie');
-})
+// Movie details route: Display details of a movie by ID
+app.get("/movie/:id", (req, res) => {
+  const movieId = parseInt(req.params.id);
+  const movie = getMovieDetailsById(movieId);
 
-app.get('/upcoming', (req, res) => {
-  res.render('upcoming');
-})
-
-app.get('/topRated', (req, res) => {
-  res.render('topRated');
-})
-
-app.get("/movie/:id", (request, response) => {
-  //For use with links like: /movie/1
-  const movieId = request.params.id;
+  if (movie) {
+    const recommendations = Movies.filter(
+      (m) => m.genre === movie.genre && m.id !== movie.id
+    ).slice(0, 3);
+    res.render("movie", { movie, recommendations });
+  } else {
+    res.status(404).send("Movie not found");
+  }
 });
 
-//Add remaining routes here
+// Top-rated movies route: Display the top 15 movies by rating
+app.get("/topRated", (req, res) => {
+  const topRatedMovies = getTopRatedMovies().slice(0, 15);
+  res.render("topRated", { movies: topRatedMovies });
+});
 
+// Upcoming movies route: Display upcoming movies
+app.get("/upcoming", (req, res) => {
+  const currentYear = new Date().getFullYear();
+  const upcomingMovies = Movies.filter(
+    (movie) => movie.releaseYear > currentYear
+  ).slice(0, 5);
+  res.render("upcoming", { movies: upcomingMovies });
+});
+
+// Random movie route: Display a random movie
+app.get("/movie/random", (req, res) => {
+  const randomId = selectRandomMovieId();
+  res.redirect(`/movie/${randomId}`);
+});
+
+// Start the server
 const port = 3000;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });
-
-// test
