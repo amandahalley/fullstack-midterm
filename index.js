@@ -29,10 +29,15 @@ app.get("/movie/:id", (req, res) => {
     const recommendations = Movies.filter(
       (m) => m.genre === movie.genre && m.id !== movie.id
     ).slice(0, 3);
-    res.render("movie", { movie, recommendations });
+    res.render("movie", { movie, recommendations }); // Render "movie.ejs"
   } else {
     res.status(404).send("Movie not found");
   }
+});
+// Randomly Generated Movie Route: Displays a random movie.
+app.get("/movie", (req, res) => {
+  const randomId = selectRandomMovieId();
+  res.redirect(`/movie/${randomId}`); // Redirects to the movie details page using "movie.ejs"
 });
 
 // Top-rated movies route: Display the top 15 movies by rating
@@ -48,12 +53,6 @@ app.get("/upcoming", (req, res) => {
     (movie) => movie.releaseYear > currentYear
   ).slice(0, 5);
   res.render("upcoming", { movies: upcomingMovies });
-});
-
-// Random movie route: Display a random movie
-app.get("/movie/random", (req, res) => {
-  const randomId = selectRandomMovieId();
-  res.redirect(`/movie/${randomId}`);
 });
 
 // Movies by genre route: Display movies by genre
