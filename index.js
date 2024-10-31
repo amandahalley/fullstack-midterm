@@ -37,8 +37,8 @@ app.get("/movie/:id", (req, res) => {
 
 // Top-rated movies route: Display the top 15 movies by rating
 app.get("/topRated", (req, res) => {
-  const topRatedMovies = getTopRatedMovies().slice(0, 15);
-  res.render("topRated", { movies: topRatedMovies });
+  const topRatedMovies = getTopRatedMovies(15); // Ensure this function returns an array of movies
+  res.render("topRated", { movies: topRatedMovies }); // Pass the movies array to the template
 });
 
 // Upcoming movies route: Display upcoming movies
