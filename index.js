@@ -29,7 +29,7 @@ app.get("/movie/:id", (req, res) => {
     const recommendations = Movies.filter(
       (m) => m.genre === movie.genre && m.id !== movie.id
     ).slice(0, 3);
-    res.render("movie", { movie, recommendations }); // Render "movie.ejs"
+    res.render("movie", { movie, recommendations });
   } else {
     res.status(404).send("Movie not found");
   }
@@ -37,13 +37,13 @@ app.get("/movie/:id", (req, res) => {
 // Randomly Generated Movie Route: Displays a random movie.
 app.get("/movie", (req, res) => {
   const randomId = selectRandomMovieId();
-  res.redirect(`/movie/${randomId}`); // Redirects to the movie details page using "movie.ejs"
+  res.redirect(`/movie/${randomId}`);
 });
 
 // Top-rated movies route: Display the top 15 movies by rating
 app.get("/topRated", (req, res) => {
-  const topRatedMovies = getTopRatedMovies(15); // Ensure this function returns an array of movies
-  res.render("topRated", { movies: topRatedMovies }); // Pass the movies array to the template
+  const topRatedMovies = getTopRatedMovies(15);
+  res.render("topRated", { movies: topRatedMovies });
 });
 
 // Upcoming movies route: Display upcoming movies
