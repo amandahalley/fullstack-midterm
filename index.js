@@ -58,7 +58,7 @@ app.get("/upcoming", (req, res) => {
 // Movies by genre route: Display movies by genre
 app.get("/movies/genre/:genre", (req, res) => {
   const genre = req.params.genre;
-  const moviesByGenre = getMoviesByGenre(genre, 10); // Adjust the number '10' to control how many movies are returned
+  const moviesByGenre = getMoviesByGenre(genre, 10);
 
   if (moviesByGenre.length > 0) {
     res.render("moviesByGenre", { genre, movies: moviesByGenre });
