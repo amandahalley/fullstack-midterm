@@ -56,6 +56,18 @@ app.get("/movie/random", (req, res) => {
   res.redirect(`/movie/${randomId}`);
 });
 
+// Movies by genre route: Display movies by genre
+app.get("/movies/genre/:genre", (req, res) => {
+  const genre = req.params.genre;
+  const moviesByGenre = getMoviesByGenre(genre, 10); // Adjust the number '10' to control how many movies are returned
+
+  if (moviesByGenre.length > 0) {
+    res.render("moviesByGenre", { genre, movies: moviesByGenre });
+  } else {
+    res.status(404).send("No movies found for the specified genre.");
+  }
+});
+
 // Start the server
 const port = 3000;
 app.listen(port, () => {
