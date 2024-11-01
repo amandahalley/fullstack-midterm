@@ -22,9 +22,11 @@ app.get("/", (req, res) => {
 
 // Movie details route: Display details of a movie by ID
 app.get("/movie/:id", (req, res) => {
-  const movieId = parseInt(req.params.id);
-  const movie = getMovieDetailsById(movieId);
+  const movieId = parseInt(req.params.id); ///Converts id to int
+  const movie = getMovieDetailsById(movieId); //Gets movie details based on ID
 
+  //Check if movie exists in list
+  //Retrieves list of movie in same genre excluding the current movie(up to 3 movies)
   if (movie) {
     const recommendations = Movies.filter(
       (m) => m.genre === movie.genre && m.id !== movie.id
@@ -34,33 +36,37 @@ app.get("/movie/:id", (req, res) => {
     res.status(404).send("Movie not found");
   }
 });
+
 // Randomly Generated Movie Route: Displays a random movie.
 app.get("/movie", (req, res) => {
-  const randomId = selectRandomMovieId();
-  res.redirect(`/movie/${randomId}`);
+  const randomId = selectRandomMovieId(); //Selects random movie by ID from list of movies
+  res.redirect(`/movie/${randomId}`); //Redirectst to movie page with details on selected movie
 });
 
 // Top-rated movies route: Display the top 15 movies by rating
 app.get("/topRated", (req, res) => {
-  const topRatedMovies = getTopRatedMovies(15);
+  const topRatedMovies = getTopRatedMovies(15);  
   res.render("topRated", { movies: topRatedMovies });
 });
 
 // Upcoming movies route: Display upcoming movies
 app.get("/upcoming", (req, res) => {
-  const currentYear = new Date().getFullYear();
-  const upcomingMovies = Movies.filter(
+  const currentYear = new Date().getFullYear(); //Gets current year 
+  const upcomingMovies = Movies.filter( //Retrieves movies with release year greater then current
     (movie) => movie.releaseYear > currentYear
   ).slice(0, 5);
-  res.render("upcoming", { movies: upcomingMovies });
+  res.render("upcoming", { movies: upcomingMovies }); //pass list of upcoming movies to template
 });
 
 // Movies by genre route: Display movies by genre
 app.get("/movies/genre/:genre", (req, res) => {
-  const genre = req.params.genre;
-  const moviesByGenre = getMoviesByGenre(genre, 10);
+  const genre = req.params.genre; //Takes genre from the route
+  const moviesByGenre = getMoviesByGenre(genre, 10); //Gets list of movies for requested genre (10 movies total)
 
-  if (moviesByGenre.length > 0) {
+  //Checks for movies found for requested genre genre
+  //If found, renders templates with genre and list of movies
+  //Otherwise returns error message
+  if (moviesByGenre.length > 0) { 
     res.render("moviesByGenre", { genre, movies: moviesByGenre });
   } else {
     res.status(404).send("No movies found for the specified genre.");
